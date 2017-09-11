@@ -1,0 +1,24 @@
+{
+	"ip": "127.0.0.1",
+	"port": 5000,
+	"struct" : [
+	
+		{"char": "a"},
+		{"signed char": 1},
+		{"unsigned char": 2},
+		{"bool": 1},
+		{"short": -1},
+		{"short": 3},
+		{"unsigned short": 2},
+		{"int": 50},
+		{"unsigned int": 1},
+		{"long": 11},
+		{"unsigned long": 3},
+		{"long long": 1000},
+		{"unsigned long long": 44},
+		{"float": 3.14},
+		{"double": 3.14},
+		{"char array": "hello"}
+	]
+}
+
