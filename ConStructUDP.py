@@ -70,11 +70,13 @@ class DataTypes:
             "unsigned long long": "Q",
             "float": "f",
             "double": "d",
-            "char array": "s"
+            "char array": "{}s"
         }
 
-    def Lookup(self, s):
+    def Lookup(self, s, l=0):
         if s in self.__data_types.keys():
+            if l :
+                return self.__data_types[s].format(l)
             return self.__data_types[s]
         else:
             raise ValueError("invalid struct field", s)
@@ -92,15 +94,24 @@ def main():
     vals = []
     for key in data["struct"]:
         field = key.keys()[0].encode('ascii','ignore')
-        parse_str += types.Lookup(field)
 
-        if field in ('char', 'char array'):
+
+        if field in ('char'):
             vals.append(key[field].encode("utf-8"))
+            parse_str += types.Lookup(field)
+        elif field in ('char array'):
+            s = key[field].encode("utf-8")
+            vals.append(s)
+            parse_str += types.Lookup(field, len(s))
         else:
             vals.append(key[field])
+            parse_str += types.Lookup(field)
 
     packed = PackStruct("!"+parse_str, vals)
-
+    print packed.fmtString()
+    print packed.sizeOfPacked()
+    print packed.getUnPacked()
+    print packed.getValues()
     con.sendSocket(packed.getPacked())
 
 
