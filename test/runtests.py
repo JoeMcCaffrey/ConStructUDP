@@ -9,7 +9,7 @@ def fake_server():
 
     while True:
         data, addr = server_sock.recvfrom(1024)
-        print "recived message"
+        print "recieved message"
         if data:
             print len(data)
             server_sock.close()

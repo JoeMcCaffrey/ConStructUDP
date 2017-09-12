@@ -17,6 +17,7 @@ class Connection:
             socket.SOCK_DGRAM)
 
     def sendSocket(self, struct_data):
+        print "Sending to: ", self.__ip, self.__port
         self.__socket.connect((self.__ip, self.__port))
 
         self.__socket.sendall(struct_data)
@@ -108,10 +109,9 @@ def main():
             parse_str += types.Lookup(field)
 
     packed = PackStruct("!"+parse_str, vals)
-    print packed.fmtString()
-    print packed.sizeOfPacked()
-    print packed.getUnPacked()
-    print packed.getValues()
+
+    print "Size of Packed Data: ", packed.sizeOfPacked()
+    print "Packed Data: ", packed.getUnPacked()
     con.sendSocket(packed.getPacked())
 
 
